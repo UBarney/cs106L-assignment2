@@ -14,15 +14,21 @@ echo 'Now building, compiling, and running project.'
 mkdir build
 cd build
 echo '#!/bin/bash
+export CC=/usr/bin/clang 
+export CXX=/usr/bin/clang++
 
 cmake .. "-DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake"
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
 cmake --build .' > build.sh
 chmod +x build.sh
 
 # build test configuration!
 echo '#!/bin/bash
+export CC=/usr/bin/clang 
+export CXX=/usr/bin/clang++
 
 cmake .. "-DTEST_WIKISCRAPER=ON -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake"
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .
 cmake --build .' > build-test.sh
 chmod +x build-test.sh
 
